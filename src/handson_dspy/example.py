@@ -16,24 +16,29 @@ def example_qna(args):
     """Run an example question answering task."""
     # Configure the language model
     provider = LLMProvider()
-    lm = provider.configure_provider()
+    lm = provider.configure()
+
+    # Set default question
+    if not args.question:
+        question = "What is the capital of Indonesia?"
+    else:
+        question = args.question
 
     # Create QnA task
-    qna = dspy.Predict('question, context -> answer, citation')
-    response = qna(question=args.question, context=args.context)
+    qna = dspy.Predict('question -> answer')
+    response = qna(question=question)
 
-    print('❓Question:', args.question)
+    print('❓Question:', question)
     print('✅ Answer:')
     print(response.answer)
     print()
-    print('🔎 Citation:', response.citation)
 
     # Print history
-    # lm.inspect_history()
+    lm.inspect_history()
 
     return response
 
 def main(args):
     """Main function"""
-    if args.example or args.question:
+    if args.example:
         example_qna(args)

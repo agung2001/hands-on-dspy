@@ -12,9 +12,9 @@ from .provider import LLMProvider
 
 class QnASignature(dspy.Signature):
     """Signature for question answering task."""
-    context = dspy.InputField(desc="Reference text containing the answer")
     question = dspy.InputField(desc="Question to be answered")
     answer = dspy.OutputField(desc="Answer to the question based on the context")
+    reasoning = dspy.OutputField(desc="Reasoning behind the answer")
 
 class QnA(dspy.Module):
     """Question answering module using DSPy."""
@@ -30,11 +30,36 @@ class QnA(dspy.Module):
         Answer a question based on the provided context.
         
         Args:
-            context (str): Reference text containing information
             question (str): Question to be answered
             
         Returns:
             str: Answer to the question
         """
         prediction = self.qa(context=context, question=question)
-        return prediction.answer
+        return prediction
+
+def qna(args):
+    """Run question answering task.
+    
+    Args:
+        args (argparse.Namespace): Command line arguments
+    """
+    provider = LLMProvider()
+    provider.configure()
+
+    # Create task
+    qna = QnA()
+    answer = qna(
+        question=args.question,
+        context=args.context
+    )
+
+    # Answer
+    print("❓Question:", args.question)
+    print("✅ Answer:", answer.answer)
+    print("🔎 Reasoning:", answer.reasoning)
+
+def main(args):
+    """Run question answering task."""
+    if args.question:
+        qna(args)

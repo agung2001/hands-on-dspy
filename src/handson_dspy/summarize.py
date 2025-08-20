@@ -9,12 +9,15 @@ This module demonstrates core DSPy features including:
 import os
 import dspy
 from .provider import LLMProvider
+from typing import Literal
 
 # Define a signature for a simple task
 class Summarize(dspy.Signature):
     """Signature for text summarization task."""
-    text = dspy.InputField()
-    summary = dspy.OutputField()
+    # NOTE: you can also define without typing such as text = dspy.InputField()
+    text: str = dspy.InputField(desc="Text to be summarized") 
+    summary: str = dspy.OutputField(desc="Summary of the text")
+    writing_style: Literal["academic", "casual", "business", "poetic"] = dspy.OutputField(desc="Writing style of the summary")
 
 # Create a module that implements the signature
 class TextSummarizer(dspy.Module):
@@ -27,13 +30,13 @@ class TextSummarizer(dspy.Module):
     def forward(self, text):
         """Generate a summary for the given text."""
         result = self.summarize(text=text)
-        return result.summary
+        return result
 
 def summarize_text(args):
     """Run text summarization task."""
     # Configure the language model
     provider = LLMProvider()
-    provider.configure_provider()
+    provider.configure()
     
     # Create the summarizer
     summarizer = TextSummarizer()
@@ -42,14 +45,18 @@ def summarize_text(args):
     with open(args.path_file, 'r') as file:
         text = file.read()
     
+    summary = summarizer(text)
+
     # Generate and print the summary
     print("📄 Original Text:")
     print(text)
     print()
 
     print("📝 Generated Summary:")
-    summary = summarizer(text)
-    print(summary)
+    print(summary.summary)
+    print()
+    
+    print("✍️ Writing Style:", summary.writing_style)
     
     return summary
 

@@ -29,7 +29,7 @@ class LLMProvider:
         """
         self.provider_type = provider_type.lower()
         
-    def configure_provider(self):
+    def configure(self):
         """Configure and return a language model for use with DSPy."""
         try:
             if self.provider_type == "openai":

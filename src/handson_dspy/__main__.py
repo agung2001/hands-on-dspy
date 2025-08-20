@@ -6,6 +6,7 @@ This file allows the module to be run as a script using 'python -m dspy'.
 import argparse
 import sys
 import handson_dspy.example as example
+import handson_dspy.qna as qna
 import handson_dspy.summarize as summarize
 # import handson_dspy.translate as translate
 
@@ -32,6 +33,7 @@ def main():
     
     # Modules
     example.main(args)
+    qna.main(args)
     summarize.main(args)
 
 if __name__ == "__main__":
