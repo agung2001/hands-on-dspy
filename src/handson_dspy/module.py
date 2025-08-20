@@ -8,30 +8,7 @@ This module demonstrates core DSPy features including:
 
 import os
 import dspy
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Get the API key from environment variables
-api_key = os.getenv("OPENAI_API_KEY")
-
-# Configure a language model
-def configure_llm():
-    """Configure and return a language model for use with DSPy."""
-    # This is a simple configuration using OpenAI
-    # In a real application, you would use your API key
-    # and potentially other configuration options
-    try:
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY not found in environment variables")
-        llm = dspy.LM("gpt-3.5-turbo", api_key=api_key)
-        dspy.configure(lm=llm)
-        return llm
-    except Exception as e:
-        print(f"Error configuring language model: {e}")
-        print("Using a local mock LM for demonstration purposes.")
-        sys.exit(1)
+from .provider import LLMProvider
 
 # Define a signature for a simple task
 class Summarize(dspy.Signature):
@@ -56,7 +33,8 @@ class TextSummarizer(dspy.Module):
 def example_summarization():
     """Run an example summarization task."""
     # Configure the language model
-    configure_llm()
+    provider = LLMProvider()
+    provider.configure_provider()
     
     # Create the summarizer
     summarizer = TextSummarizer()
