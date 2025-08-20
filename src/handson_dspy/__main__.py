@@ -26,14 +26,16 @@ def main():
 
     # Argument string
     parser.add_argument("--context", type=str, default="", help="Context for the task")
+    parser.add_argument("--model", type=str, default="qwen3:8b", help="Language for the task")
     parser.add_argument("--path-file", type=str, default="samples/dspy.md", help="Path to the file to be summarized")
+    parser.add_argument("--provider", type=str, default="ollama", help="Provider for the language model")
     parser.add_argument("--question", type=str, default="", help="Question to be answered")
     
     # Parse args
     args = parser.parse_args()
     
     # Configure the language model
-    provider = LLMProvider()
+    provider = LLMProvider(args)
     args.lm = provider.configure()
 
     # Modules

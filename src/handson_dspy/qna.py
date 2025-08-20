@@ -13,7 +13,6 @@ class QnASignature(dspy.Signature):
     """Signature for question answering task."""
     question = dspy.InputField(desc="Question to be answered")
     answer = dspy.OutputField(desc="Answer to the question based on the context")
-    reasoning = dspy.OutputField(desc="Reasoning behind the answer")
 
 class QnA(dspy.Module):
     """Question answering module using DSPy."""

@@ -21,13 +21,14 @@ ollama_api_base = os.getenv("OLLAMA_API_BASE")
 class LLMProvider:
     """A class to configure and provide language model instances for DSPy."""
     
-    def __init__(self, provider_type="ollama"):
+    def __init__(self, args):
         """Initialize the LLM provider.
         
         Args:
             provider_type (str): Type of LLM provider ('openai' or 'ollama')
         """
-        self.provider_type = provider_type.lower()
+        self.provider_type = args.provider.lower()
+        self.model = args.model
         
     def configure(self):
         """Configure and return a language model for use with DSPy."""
@@ -35,9 +36,10 @@ class LLMProvider:
             if self.provider_type == "openai":
                 if not openai_api_key:
                     raise ValueError("OPENAI_API_KEY not found in environment variables")
-                llm = dspy.LM("gpt-3.5-turbo", api_key=openai_api_key)
+                llm = dspy.LM(self.model, api_key=openai_api_key)
             elif self.provider_type == "ollama":
-                llm = dspy.LM("ollama_chat/gemma3:4b", api_base=ollama_api_base, api_key='')
+                provider = f"ollama_chat/{self.model}"
+                llm = dspy.LM(provider, api_base=ollama_api_base, api_key='')
             else:
                 raise ValueError(f"Unsupported provider type: {self.provider_type}")
             

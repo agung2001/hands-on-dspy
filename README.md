@@ -13,6 +13,7 @@ python -m handson_dspy --help
 ```
 
 ## Usage
+- Provider and Model: `--provider {openai, ollama} --model {model_name}`
 - Example: `--example`
 - Question: `--question {question}`
 - Summarize text: `--summarize --file-path {/path/to/file}`
