@@ -1,0 +1,10 @@
+README.md
+setup.py
+src/hands_on_dspy.egg-info/PKG-INFO
+src/hands_on_dspy.egg-info/SOURCES.txt
+src/hands_on_dspy.egg-info/dependency_links.txt
+src/hands_on_dspy.egg-info/requires.txt
+src/hands_on_dspy.egg-info/top_level.txt
+src/handson_dspy/__init__.py
+src/handson_dspy/__main__.py
+src/handson_dspy/module.py

@@ -6,6 +6,7 @@ This module demonstrates core DSPy features including:
 - Building simple pipelines
 """
 
+import os
 import dspy
 from dotenv import load_dotenv
 
