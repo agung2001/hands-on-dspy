@@ -8,7 +8,6 @@ This module demonstrates core DSPy features including:
 
 import os
 import dspy
-from .provider import LLMProvider
 
 class QnASignature(dspy.Signature):
     """Signature for question answering task."""
@@ -44,9 +43,6 @@ def qna(args):
     Args:
         args (argparse.Namespace): Command line arguments
     """
-    provider = LLMProvider()
-    provider.configure()
-
     # Create task
     qna = QnA()
     answer = qna(

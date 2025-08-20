@@ -5,6 +5,7 @@ This file allows the module to be run as a script using 'python -m dspy'.
 
 import argparse
 import sys
+from .provider import LLMProvider
 import handson_dspy.example as example
 import handson_dspy.qna as qna
 import handson_dspy.summarize as summarize
@@ -31,6 +32,10 @@ def main():
     # Parse args
     args = parser.parse_args()
     
+    # Configure the language model
+    provider = LLMProvider()
+    args.lm = provider.configure()
+
     # Modules
     example.main(args)
     qna.main(args)

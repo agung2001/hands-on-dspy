@@ -9,15 +9,10 @@ This module demonstrates core DSPy features including:
 
 import os
 import dspy
-from .provider import LLMProvider
 
 # Example function to demonstrate usage
 def example_qna(args):
     """Run an example question answering task."""
-    # Configure the language model
-    provider = LLMProvider()
-    lm = provider.configure()
-
     # Set default question
     if not args.question:
         question = "What is the capital of Indonesia?"
@@ -34,7 +29,7 @@ def example_qna(args):
     print()
 
     # Print history
-    lm.inspect_history()
+    args.lm.inspect_history()
 
     return response
 

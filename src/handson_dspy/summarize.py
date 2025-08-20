@@ -8,7 +8,6 @@ This module demonstrates core DSPy features including:
 
 import os
 import dspy
-from .provider import LLMProvider
 from typing import Literal
 
 # Define a signature for a simple task
@@ -33,11 +32,7 @@ class TextSummarizer(dspy.Module):
         return result
 
 def summarize_text(args):
-    """Run text summarization task."""
-    # Configure the language model
-    provider = LLMProvider()
-    provider.configure()
-    
+    """Run text summarization task."""    
     # Create the summarizer
     summarizer = TextSummarizer()
 
