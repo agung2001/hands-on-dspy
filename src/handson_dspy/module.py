@@ -25,14 +25,13 @@ def configure_llm():
     try:
         if not api_key:
             raise ValueError("OPENAI_API_KEY not found in environment variables")
-        llm = dspy.OpenAI(model="gpt-3.5-turbo", api_key=api_key)
-        dspy.settings.configure(lm=llm)
+        llm = dspy.LM("gpt-3.5-turbo", api_key=api_key)
+        dspy.configure(lm=llm)
         return llm
     except Exception as e:
         print(f"Error configuring language model: {e}")
         print("Using a local mock LM for demonstration purposes.")
-        # Fallback to a mock LM for demonstration
-        return dspy.MockLM()
+        sys.exit(1)
 
 # Define a signature for a simple task
 class Summarize(dspy.Signature):
