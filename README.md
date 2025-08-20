@@ -13,9 +13,10 @@ python -m handson_dspy --help
 ```
 
 ## Usage
-- Provider and Model: `--provider {openai, ollama} --model {model_name}`
+- Answer Question via LLM : `--question {question}`
+- Answer Question via Wikipedia : `--wikipedia --question {question}`
 - Example: `--example`
-- Question: `--question {question}`
+- Provider and Model: `--provider {openai, ollama} --model {model_name}`
 - Summarize text: `--summarize --file-path {/path/to/file}`
 
 ## Modules

@@ -23,7 +23,7 @@ class QnA(dspy.Module):
         if provider:
             dspy.settings.configure(lm=provider)
     
-    def forward(self, context, question):
+    def forward(self, question):
         """
         Answer a question based on the provided context.
         
@@ -33,7 +33,7 @@ class QnA(dspy.Module):
         Returns:
             str: Answer to the question
         """
-        prediction = self.qa(context=context, question=question)
+        prediction = self.qa(question=question)
         return prediction
 
 def qna(args):
@@ -44,10 +44,7 @@ def qna(args):
     """
     # Create task
     qna = QnA()
-    answer = qna(
-        question=args.question,
-        context=args.context
-    )
+    answer = qna(question=args.question)
 
     # Answer
     print("❓Question:", args.question)
