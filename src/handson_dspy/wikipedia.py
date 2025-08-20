@@ -48,11 +48,8 @@ def search_wikipedia(args):
     # Define ReAct Module
     react_module = dspy.ReAct('question -> response', tools=[wikipedia_search])
 
-    # Example
-    text = "Who won the world series in 1983 and who won the world cup in 1966?"
-
     # Run
-    react_response = react_module(question=text)
+    react_response = react_module(question=args.question)
 
     print("Answer: ", react_response.response)
     print("\nReasoning: ", react_response.reasoning)

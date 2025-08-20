@@ -28,4 +28,5 @@ python -m handson_dspy --help
 - Majority: Use majority voting to combine the output of multiple chains of thought and program
 
 ## Resource
-- [dspy](https://github.com/stanfordnlp/dspy)
+- [GitHub - stanfordnlp/dspy](https://github.com/stanfordnlp/dspy)
+- [DSPy Breakdown](https://github.com/ALucek/dspy-breakdown/blob/main/dspy_breakdown.ipynb)
