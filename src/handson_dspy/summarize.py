@@ -29,31 +29,32 @@ class TextSummarizer(dspy.Module):
         result = self.summarize(text=text)
         return result.summary
 
-# Example function to demonstrate usage
-def example_summarization():
-    """Run an example summarization task."""
+def summarize_text(args):
+    """Run text summarization task."""
     # Configure the language model
     provider = LLMProvider()
     provider.configure_provider()
     
     # Create the summarizer
     summarizer = TextSummarizer()
-    
-    # Example text to summarize
-    text = """
-    DSPy is a framework for algorithmically optimizing LM prompts and weights 
-    to solve knowledge-intensive tasks. It provides a unified interface for 
-    programming with foundation models, fine-tuning smaller models, and 
-    optimizing prompts and pipelines. DSPy introduces a new paradigm for 
-    programming with language models, focusing on declarative signatures, 
-    composable modules, and optimizable programs.
-    """
+
+    # Read text from file
+    with open(args.path_file, 'r') as file:
+        text = file.read()
     
     # Generate and print the summary
-    print("\nOriginal Text:")
+    print("📄 Original Text:")
     print(text)
-    print("\nGenerated Summary:")
+    print()
+
+    print("📝 Generated Summary:")
     summary = summarizer(text)
     print(summary)
     
     return summary
+
+def main(args):
+    """Run summarization task."""
+    if args.summarize and args.path_file:
+        summarize_text(args)
+    
