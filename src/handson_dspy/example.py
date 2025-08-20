@@ -12,18 +12,21 @@ import dspy
 from .provider import LLMProvider
 
 # Example function to demonstrate usage
-def example_qna(question):
+def example_qna(args):
     """Run an example question answering task."""
     # Configure the language model
     provider = LLMProvider()
     lm = provider.configure_provider()
 
     # Create QnA task
-    qna = dspy.Predict('question -> answer')
-    response = qna(question=question)
+    qna = dspy.Predict('question, context -> answer, citation')
+    response = qna(question=args.question, context=args.context)
 
-    print('Question:', question)
-    print('Answer:', response.answer)
+    print('❓Question:', args.question)
+    print('✅ Answer:')
+    print(response.answer)
+    print()
+    print('🔎 Citation:', response.citation)
 
     # Print history
     # lm.inspect_history()
@@ -33,4 +36,4 @@ def example_qna(question):
 def main(args):
     """Main function"""
     if args.example or args.question:
-        example_qna(args.question)
+        example_qna(args)

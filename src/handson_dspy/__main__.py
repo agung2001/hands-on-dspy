@@ -23,8 +23,9 @@ def main():
     parser.add_argument("--summarize",action="store_true",help="Run summarization task")
 
     # Argument string
-    parser.add_argument("--question", type=str, default="", help="Question to be answered")
+    parser.add_argument("--context", type=str, default="", help="Context for the task")
     parser.add_argument("--path-file", type=str, default="samples/dspy.md", help="Path to the file to be summarized")
+    parser.add_argument("--question", type=str, default="", help="Question to be answered")
     
     # Parse args
     args = parser.parse_args()
